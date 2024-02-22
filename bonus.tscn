@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://btyrfqvqqryc3"]
+
+[ext_resource type="Script" path="res://bonus.gd" id="1_3rmsa"]
+[ext_resource type="Texture2D" uid="uid://dfa570avuo6i3" path="res://art/bonus-3.png" id="1_yndo6"]
+[ext_resource type="Texture2D" uid="uid://bm0c21ktse0r0" path="res://art/bonus-2.png" id="2_7unu5"]
+[ext_resource type="Texture2D" uid="uid://uhcehghlbd8u" path="res://art/bonus-1.png" id="3_rlg72"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2tah"]
+radius = 19.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dqr0c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yndo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7unu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rlg72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7unu5")
+}],
+"loop": true,
+"name": &"bonus_grow",
+"speed": 5.0
+}]
+
+[node name="bonus" type="RigidBody2D" groups=["bonus"]]
+position = Vector2(233, 322)
+collision_mask = 0
+script = ExtResource("1_3rmsa")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p2tah")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dqr0c")
+animation = &"bonus_grow"
+autoplay = "bonus_grow"
+frame = 2
+frame_progress = 0.666634
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="TTL" type="Timer" parent="."]
+process_mode = 1
+one_shot = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="TTL" to="." method="_on_ttl_timeout"]

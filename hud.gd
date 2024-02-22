@@ -5,7 +5,7 @@ signal reload_game
 
 func _ready():
 	$ReloadButton.hide()
-
+	
 func show_message(text):
 	$Message.text = text
 	$Message.show()

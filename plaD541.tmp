@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://bli8y6uswtkkg"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_5gmrc"]
+[ext_resource type="Texture2D" uid="uid://batx6qgsj6akb" path="res://art/playerEnd_01.png" id="2_mloi3"]
+[ext_resource type="Texture2D" uid="uid://fil80a4cai65" path="res://art/playerEnd_02.png" id="3_7mnn5"]
+[ext_resource type="Texture2D" uid="uid://bibqrafjjtc2k" path="res://art/playerEnd_03.png" id="4_ryn13"]
+[ext_resource type="Texture2D" uid="uid://dbw5vk3yc4e6d" path="res://art/playerEnd_04.png" id="5_rn1sa"]
+[ext_resource type="Texture2D" uid="uid://cd2vandqbayfy" path="res://art/playerFly_01.png" id="6_mw2lm"]
+[ext_resource type="Texture2D" uid="uid://hvxx31r1e6gq" path="res://art/playerFly_02.png" id="7_wewpl"]
+[ext_resource type="Texture2D" uid="uid://b6dwe1pr24hwc" path="res://art/playerIdle_01.png" id="8_arbsx"]
+[ext_resource type="Texture2D" uid="uid://t0rv3cmcfvcm" path="res://art/playerIdle_02.png" id="9_61ucb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l3mok"]
+radius = 26.0
+height = 56.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4muym"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mloi3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7mnn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ryn13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rn1sa")
+}],
+"loop": false,
+"name": &"end",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_mw2lm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wewpl")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_arbsx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_61ucb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="Area2D"]
+position = Vector2(55, 67)
+input_pickable = false
+script = ExtResource("1_5gmrc")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_l3mok")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 2)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_4muym")
+animation = &"idle"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
