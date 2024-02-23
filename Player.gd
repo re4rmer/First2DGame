@@ -33,6 +33,7 @@ func _on_body_entered(body):
 		hide()
 	elif body.is_in_group("bonus"):
 		get_bonus.emit()
+		body.queue_free()
 
 func start(pos):
 	position = pos

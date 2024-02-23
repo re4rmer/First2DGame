@@ -10,8 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://cbhbgnxkdurl1" path="res://art/playerIdle_01.png" id="8_arbsx"]
 [ext_resource type="Texture2D" uid="uid://px83t6t3c33k" path="res://art/playerIdle_02.png" id="9_61ucb"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u380u"]
-radius = 29.0172
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_toms4"]
+radius = 30.0
+height = 66.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4muym"]
 animations = [{
@@ -61,12 +62,12 @@ script = ExtResource("1_5gmrc")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_u380u")
+shape = SubResource("CapsuleShape2D_toms4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 23)
+position = Vector2(0, 20)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_4muym")
-animation = &"end"
+animation = &"idle"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

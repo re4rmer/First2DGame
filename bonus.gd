@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 func _ready():
-	$TTL.wait_time = randi_range(4, 10)
+	$TTL.wait_time = randi_range(5, 12)
 
 func _on_ttl_timeout():
 	queue_free()
